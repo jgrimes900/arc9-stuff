@@ -1,0 +1,15 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "models\weapons\v_smg1\texture5"
+	"$model" "1"
+	"$additive" "1"
+	
+	Proxies
+	{
+		IronsightFractionAlpha
+		{
+			"minFrac"	"0.7"
+		}
+	}
+
+}
