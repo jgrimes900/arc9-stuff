@@ -22,11 +22,13 @@ SWEP.Trivia = {
 
 SWEP.Slot = 1
 
-SWEP.MirrorVMWM = false
+SWEP.MirrorVMWM = true
+SWEP.NoTPIKVMPos = true
+SWEP.WorldModelMirror = "models/hl1/c_hl1_glock.mdl"
 SWEP.WorldModelOffset = {
-    Pos = Vector(0, 0, 0),
+    Pos = Vector(-13, 3, -9),
     TPIKPos = Vector(0, 0, 0),
-    Ang = Angle(0, 0, 0),
+    Ang = Angle(0, -10, 180),
     Scale = 1
 }
 
@@ -55,7 +57,7 @@ SWEP.BodyDamageMults = {
     [HITGROUP_RIGHTLEG] = 0.9,
 }
 
-SWEP.PhysBulletMuzzleVelocity = 350 * 12
+SWEP.PhysBulletMuzzleVelocity = 900 * 12
 SWEP.PhysBulletGravity = 1.5
 SWEP.PhysBulletDrag = 1.5
 
@@ -69,7 +71,7 @@ SWEP.ChamberSize = 1 -- how many rounds can be chambered.
 SWEP.ClipSize = 17 -- DefaultClip is automatically set.
 SWEP.SupplyLimit = 5
 
-SWEP.Recoil = 1
+SWEP.Recoil 	= 1
 SWEP.RecoilSide = 0.275
 SWEP.RecoilUp = 1.25
 
@@ -82,7 +84,9 @@ SWEP.Firemodes = {
     },
     {
         Mode = 3,
-        Mult_HipDispersion = 2.5,
+        HipDispersionMult = 2.5,
+		RPMMult = 2,
+		RunawayBurst = true
     },
 }
 
@@ -128,7 +132,7 @@ SWEP.VisualRecoilCenter = Vector(4.4, 4, -1.3)
 
 SWEP.Spread = 15/2160
 
-SWEP.FreeAimRadius = 0 -- In degrees, how much this gun can free aim in hip fire.
+SWEP.FreeAimRadius = 3 -- In degrees, how much this gun can free aim in hip fire.
 
 SWEP.Sway = 1.25 -- How much the gun sways.
 
@@ -160,6 +164,7 @@ SWEP.ShootPitch = 100 -- pitch of shoot sound
 SWEP.ShootSound = "ArcCW_HL1.Glock_Fire"
 SWEP.ShootSoundSilenced = "ArcCW_HL1.Glock_Sil"
 SWEP.DistantShootSound = "ArcCW_HL1.Glock_Fire"
+SWEP.DistantShootSoundSilenced = "ArcCW_HL1.Glock_Sil"
 
 SWEP.MuzzleParticle = "muzzleflash_pistol"
 SWEP.ShellModel = "models/shells/shell_9mm.mdl"
@@ -191,6 +196,7 @@ SWEP.IronSights = {
 SWEP.HoldtypeHolstered = "normal"
 SWEP.HoldtypeActive = "pistol"
 SWEP.HoldtypeSights = "revolver"
+SWEP.HoldTypeNPC = "pistol"
 
 SWEP.AnimShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 
@@ -207,6 +213,9 @@ SWEP.CustomizeSnapshotAng = Angle(-90, 0, 0)
 SWEP.HolsterPos = Vector(0, -5, -5)
 SWEP.HolsterAng = Angle(36.533, 0, 0)
 
+SWEP.RestPos = Vector(10, 2, 1)
+SWEP.RestAng = Angle(40, -20, 0)
+
 SWEP.CrouchPos = Vector(0, -1, -1)
 SWEP.CrouchAng = Angle(0, 0, 0)
 
@@ -214,6 +223,19 @@ SWEP.BarrelOffsetSighted = Vector(0, 0, -1)
 SWEP.BarrelOffsetHip = Vector(2, 0, -2)
 
 SWEP.ExtraSightDist = 10
+
+SWEP.AttachmentElements = {
+	["hl_glock_clip_std"] = {
+        Bodygroups = {
+            {1, 0}
+        }
+    },
+	["hl_glock_clip_ex"] = {
+        Bodygroups = {
+            {1, 1}
+        }
+    }
+}
 
 SWEP.Attachments = {
     {
@@ -225,10 +247,19 @@ SWEP.Attachments = {
     },
     {
         PrintName = "UNDERBARREL",
-        Category = {"hl_ubgl"},
+        Category = {"hl_ubgl","foregrip"},
         Bone = "Bone01",
 		Pos = Vector(4.1, 9, 0),
 		Ang = Angle(0, 107.5, -90),
+    },
+	{
+        PrintName = "CLIP",
+        Category = {"hl_glock_clip"},
+		Bone = "Box02",
+		Pos = Vector(0, 0, 0),
+		Ang = Angle(0, 0, 0),
+		Installed = "hl_glock_clip_std",
+		Integral = true,
     },
     {
         PrintName = "AMMO",
@@ -240,18 +271,44 @@ SWEP.Attachments = {
 	{
         PrintName = "SIGHTS",
         Category = {"hl_sights"},
-        Bone = "Bone01",
-        Pos = Vector(5, 5.2, 0),
-        Ang = Angle(0, -72, -90),
+        Bone = "Bone02",
+        Pos = Vector(1.7, 2, 0),
+        Ang = Angle(0, -73.5, -90),
 		CorrectiveAng = Angle(-5, -0, 0),
     },
 	{
         PrintName = "STOCK",
-        Category = {"hl_stock"},
+        Category = {"hl_stock", "fas_stock"},
         Bone = "Bone01",
-        Pos = Vector(2.8, 1,0),
+        Pos = Vector(-1, 2,0),
         Ang = Angle(0, -73, -90),
     },
+	{
+        PrintName = "CAMO",
+        Category = "universal_camo",
+        CosmeticOnly = true,
+    },
+	{
+		PrintName = "SIDE MOUNT",
+        Category = {"mod_board","killcounter","killcounter2"},
+        Bone = "Bone02",
+        Pos = Vector(1.1, 3, -0.75),
+        Ang = Angle(0, -73.5, -90),
+	},
+	{
+        PrintName = "STICKER",
+        StickerModel = "models/hl1/stickers/hl1_glock_a.mdl",
+        Category = "stickers",
+        Bone = "Bone01",
+        Pos = Vector(0, 0, 0),
+    },
+	{
+        PrintName = "STICKER",
+        StickerModel = "models/hl1/stickers/hl1_glock_b.mdl",
+        Category = "stickers",
+        Bone = "Bone01",
+        Pos = Vector(0, -3.75, 2),
+    }
 }
 
 
@@ -299,9 +356,18 @@ SWEP.Animations = {
         TPAnim = ACT_HL2MP_GESTURE_RELOAD_PISTOL,
         Checkpoints = {28, 41, 53},
         FrameRate = 30,
-        LHIK = true,
-        LHIKIn = 0.5,
-        LHIKOut = 0.5,
+        IKTimeLine = {
+            {
+                t = 0.1,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 1,
+                lhik = 1,
+                rhik = 0
+            }
+        },
         SoundTable = {
             {
                 s = "ArcCW_HL1.Glock_Clip2",
@@ -319,9 +385,18 @@ SWEP.Animations = {
         TPAnim = ACT_HL2MP_GESTURE_RELOAD_PISTOL,
         Checkpoints = {28, 41, 53},
         FrameRate = 18,
-        LHIK = true,
-        LHIKIn = 0.5,
-        LHIKOut = 0.5,
+        IKTimeLine = {
+            {
+                t = 0.1,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 1,
+                lhik = 1,
+                rhik = 0
+            }
+        },
         SoundTable = {
             {
                 s = "ArcCW_HL1.Glock_Clip2",

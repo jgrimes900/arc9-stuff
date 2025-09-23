@@ -1,4 +1,16 @@
 "VertexLitGeneric"
 {
 	"$baseTexture" "models/v_hkmp5-sd/gunbodyrear"
+
+	"$detailblendmode" 4
+
+	"$color2" "[0.75 0.75 0.75]"
+
+	Proxies {
+		CustomCamo {
+			camoTexture $detail
+			camoScale $detailscale
+            blend $detailblendfactor
+		}
+	}
 }

@@ -20,21 +20,20 @@ SWEP.Description = [[HECU Standard Issue. Equipped with an M203PI Grenade Launch
 
 SWEP.Slot = 2
 
-SWEP.MirrorVMWM = false
+SWEP.MirrorVMWM = true
+SWEP.NoTPIKVMPos = true
+SWEP.WorldModelMirror = "models/hl1/c_hl1mp5.mdl"
 SWEP.WorldModelOffset = {
-    Pos = Vector(0, 0, 0),
+    Pos = Vector(-8, 4, -10),
     TPIKPos = Vector(0, 0, 0),
-    Ang = Angle(0, 0, 0),
+    Ang = Angle(0, 0, 180),
     Scale = 1
 }
-SWEP.NoTPIKVMPos = true
 
 SWEP.DefaultBodygroups = "0000000000000000000000"
 
 SWEP.ViewModel = "models/hl1/c_hl1mp5.mdl"
-SWEP.PlayerModel = "models/hl1/p_hl1mp5.mdl"
 SWEP.WorldModel = "models/hl1/w_hl1mp5.mdl"
-SWEP.WorldModel	= SWEP.PlayerModel
 
 SWEP.DamageMax = 15
 SWEP.DamageMin = 10 -- damage done at maximum range
@@ -161,9 +160,10 @@ SWEP.Ammo = "9mmRound" -- what ammo type the gun uses
 SWEP.ShootVol = 100 -- volume of shoot sound
 SWEP.ShootPitch = 100 -- pitch of shoot sound
 
-SWEP.ShootSound = "weapons/hks1.wav"
-SWEP.ShootSoundSilenced = "weapons/pl_gun1.wav"
-SWEP.DistantShootSound = "weapons/hks1.wav"
+SWEP.ShootSound = "ArcCW_HL1.MP5_Fire"
+SWEP.ShootSoundSilenced = "ArcCW_HL1.MP5_Sil"
+SWEP.DistantShootSound = "ArcCW_HL1.MP5_Fire"
+SWEP.DistantShootSoundSilenced = "ArcCW_HL1.MP5_Sil"
 
 SWEP.MuzzleParticle = "muzzleflash_smg"
 SWEP.MuzzleSmoke = false
@@ -206,6 +206,7 @@ SWEP.IronSights = {
 SWEP.HoldtypeHolstered = "passive"
 SWEP.HoldtypeActive = "smg"
 SWEP.HoldtypeSights = "smg"
+SWEP.HoldTypeNPC = "smg"
 
 SWEP.AnimShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_SMG1
 
@@ -218,6 +219,9 @@ SWEP.CustomizePos = Vector(16, 32, 8)
 
 SWEP.HolsterPos = Vector(0.532, -6, 0)
 SWEP.HolsterAng = Angle(-7.036, 30.016, 0)
+
+SWEP.RestPos = Vector(10, 9, 0)
+SWEP.RestAng = Angle(40, -20, 0)
 
 SWEP.CrouchPos = Vector(0, -1, -1)
 SWEP.CrouchAng = Angle(0, 0, 0)
@@ -255,7 +259,7 @@ SWEP.Attachments = {
     },
     {
         PrintName = "UNDERBARREL",
-        Category = {"hl_ubgl"},
+        Category = {"hl_ubgl","foregrip"},
         Bone = "Bone05",
 		Pos = Vector(-9.5, -1.75, -.45),
 		Ang = Angle(0, 0, 90),
@@ -287,12 +291,24 @@ SWEP.Attachments = {
     },
 	{
         PrintName = "STOCK",
-        Category = {"hl_stock"},
+        Category = {"hl_stock", "fas_stock"},
         Bone = "Bone05",
         Pos = Vector(1.5, -4,-.45),
         Ang = Angle(0, 180, 90),
 		Installed = "hl_mp5_stock",
     },
+	{
+		PrintName = "SIDE MOUNT",
+        Category = {"charm", "mod_board","killcounter","killcounter2"},
+        Bone = "Bone05",
+        Pos = Vector(-9, -3.75, 1),
+        Ang = Angle(0, 180, 90),
+	},
+	{
+        PrintName = "CAMO",
+        Category = "universal_camo",
+        CosmeticOnly = true,
+    }
 }
 
 SWEP.Animations = {
@@ -311,8 +327,18 @@ SWEP.Animations = {
         Source = "deploy",
         Time = 1,
         LHIK = true,
-        LHIKIn = 0,
-        LHIKOut = 0.25,
+        IKTimeLine = {
+            {
+                t = 0.0,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 1,
+                lhik = 1,
+                rhik = 0
+            }
+        },
     },
     ["fire"] = {
         Source = {"shoot", "shoot2", "shoot3"},
@@ -332,9 +358,18 @@ SWEP.Animations = {
         Time = 1.5,
         TPAnim = ACT_HL2MP_GESTURE_RELOAD_SMG1,
         FrameRate = 30,
-        LHIK = true,
-        LHIKIn = 0.5,
-        LHIKOut = 0.5,
+        IKTimeLine = {
+            {
+                t = 0.1,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 1,
+                lhik = 1,
+                rhik = 0
+            }
+        },
         SoundTable = {
             {
                 s = "ArcCW_HL1.MP5_Out",
@@ -351,9 +386,18 @@ SWEP.Animations = {
         Time = 1.5,
         TPAnim = ACT_HL2MP_GESTURE_RELOAD_SMG1,
         FrameRate = 30,
-        LHIK = true,
-        LHIKIn = 0.5,
-        LHIKOut = 0.5,
+        IKTimeLine = {
+            {
+                t = 0.1,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 1,
+                lhik = 1,
+                rhik = 0
+            }
+        },
         SoundTable = {
             {
                 s = "ArcCW_HL1.MP5_Out",
@@ -387,7 +431,7 @@ sound.Add( {
     volume = 1.0,
     level = 100,
     pitch = {95, 110},
-    sound = {"weapons/pl_gun1.wav", "weapons/pl_gun2.wav"}
+    sound = {"weapons/hks1_s.wav", "weapons/hks2_s.wav", "weapons/hks3_s.wav"}
 } )
 sound.Add( {
     name = "ArcCW_HL1.MP5_In",

@@ -21,21 +21,20 @@ SWEP.Trivia = {
 SWEP.Description = [[A steel bar with a flattened, hooked end to be used as a lever to manually force things apart. Now used for bashing skulls in and breaking crates.]]
 
 SWEP.ViewModel = "models/hl1/c_hl1_crowbar.mdl"
-SWEP.PlayerModel = "models/hl1/p_hl1_crowbar.mdl"
 SWEP.WorldModel = "models/hl1/w_hl1_crowbar.mdl"
-SWEP.WorldModel	= SWEP.PlayerModel
 SWEP.ViewModelFOVBase = 60
 
 SWEP.Slot = 0
 
 SWEP.MirrorVMWM = true
+SWEP.NoTPIKVMPos = true
+SWEP.WorldModelMirror = "models/hl1/c_hl1_crowbar.mdl"
 SWEP.WorldModelOffset = {
-    Pos = Vector(0, 0, 0),
-    Ang = Angle(0, 0, 0),
+    Pos = Vector(-8, 8, -16),
+    TPIKPos = Vector(0, 0, 0),
+    Ang = Angle(0, -10, 180),
     Scale = 1
 }
-SWEP.NoTPIKVMPos = true
-SWEP.NoTPIK = true
 
 SWEP.EntitySelectIcon = true
 
@@ -112,6 +111,7 @@ SWEP.HoldTypeSprint = "normal"
 SWEP.HoldTypeHolstered = "normal"
 SWEP.HoldTypeSights = "melee"
 SWEP.HoldTypeCustomize = "slam"
+SWEP.HoldTypeNPC = "melee"
 
 SWEP.AnimShoot = ACT_HL2MP_GESTURE_RANGE_ATTACK_PISTOL
 SWEP.AnimReload = ACT_HL2MP_GESTURE_RELOAD_MAGIC
@@ -124,6 +124,23 @@ SWEP.AnimMelee = ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE
 SWEP.MeleeHitSound = "ArcCW_HL1.Crowbar_Hit"
 SWEP.MeleeHitWallSound = "ArcCW_HL1.Crowbar_HitWorld"
 SWEP.MeleeSwingSound = "ArcCW_HL1.Crowbar_Swing"
+
+SWEP.Attachments = {
+	{
+        PrintName = "CAMO",
+        Category = "universal_camo",
+        CosmeticOnly = true,
+		Installed = "camo_arc9_base_flat_red",
+    },
+	{
+        PrintName = "SIDE MOUNT",
+        Category = {"charm", "mod_board","killcounter","killcounter2"},
+        Bone = "Bip01 R Hand",
+        Pos = Vector(3, -1.75, 13),
+        Ang = Angle(90, 0, 0),
+		CosmeticOnly = true,
+    },
+}
 
 SWEP.Animations = {
     ["idle"] = {

@@ -1,0 +1,1 @@
+game.AddAmmoType({name = "hunter_flechette",maxcarry = 240})

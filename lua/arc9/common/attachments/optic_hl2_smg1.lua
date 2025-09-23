@@ -4,7 +4,7 @@ ATT.Icon = Material("entities/acwatt_optic_holo.png")
 ATT.Description = [[A red-dot sight.]]
 
 ATT.SortOrder = 100
-ATT.Category = "hl_sights"
+ATT.Category = {"hl_sights", "optic_css", "fas_optic", "fas_optic_medium"}
 
 ATT.Model = "models/weapons/arccw/attc/smg1_scope.mdl"
 

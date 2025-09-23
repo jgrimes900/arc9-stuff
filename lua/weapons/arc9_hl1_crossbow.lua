@@ -21,11 +21,13 @@ SWEP.Trivia = {
 SWEP.Slot = 2
 SWEP.SlotPos = 2
 
-SWEP.MirrorVMWM = false
+SWEP.MirrorVMWM = true
+SWEP.NoTPIKVMPos = true
+SWEP.WorldModelMirror = "models/hl1/c_crossbow.mdl"
 SWEP.WorldModelOffset = {
-    Pos = Vector(0, 0, 0),
+    Pos = Vector(-4, 9, -10),
     TPIKPos = Vector(0, 0, 0),
-    Ang = Angle(0, 0, 0),
+    Ang = Angle(-10, 5, 180),
     Scale = 1
 }
 
@@ -192,6 +194,7 @@ SWEP.IronSights = {
 SWEP.HoldtypeHolstered = "normal"
 SWEP.HoldtypeActive = "crossbow"
 SWEP.HoldtypeSights = "crossbow"
+SWEP.HoldTypeNPC = "crossbow"
 
 SWEP.AnimShoot = ACT_VM_PRIMARYATTACK
 
@@ -203,6 +206,9 @@ SWEP.CustomizePos = Vector(16, 32, 8)
 
 SWEP.HolsterPos = Vector(0, -5, -5)
 SWEP.HolsterAng = Angle(36.533, 0, 0)
+
+SWEP.RestPos = Vector(10, 9, 0)
+SWEP.RestAng = Angle(40, -20, 0)
 
 SWEP.CrouchPos = Vector(0, -1, -1)
 SWEP.CrouchAng = Angle(0, 0, 0)

@@ -20,7 +20,9 @@ SWEP.Slot = 2
 
 SWEP.UseHands = true
 
-SWEP.MirrorVMWM = false
+SWEP.MirrorVMWM = true
+SWEP.NoTPIKVMPos = true
+SWEP.WorldModelMirror = "models/hl1/c_hl1_spas12.mdl"
 SWEP.WorldModelOffset = {
     Pos = Vector(0, 0, 0),
     TPIKPos = Vector(0, 0, 0),
@@ -32,8 +34,6 @@ SWEP.DefaultBodygroups = "0000000000000000000000"
 
 SWEP.ViewModel = "models/hl1/c_hl1_spas12.mdl"
 SWEP.WorldModel = "models/hl1/w_hl1_spas12.mdl"
-SWEP.PlayerModel = "models/hl1/p_hl1_spas12.mdl"
-SWEP.WorldModel	= SWEP.PlayerModel
 SWEP.ViewModelFOVBase = 60
 
 SWEP.DamageMax = 8
@@ -163,8 +163,9 @@ SWEP.ShootVol = 120 -- volume of shoot sound
 SWEP.ShootPitch = 100 -- pitch of shoot sound
 
 SWEP.ShootSound = "ArcCW_HL1.SPAS_Fire"
-SWEP.ShootSoundSilenced = "weapons/arccw/m590_suppressed_tp.wav"
-SWEP.DistantShootSound = "weapons/arccw/sawedoff/sawedoff-1-distant.wav"
+SWEP.ShootSoundSilenced = "ArcCW_HL1.SPAS_Sil"
+SWEP.DistantShootSound = "ArcCW_HL1.SPAS_Fire"
+SWEP.DistantShootSoundSilenced = "ArcCW_HL1.SPAS_Sil"
 
 SWEP.MuzzleParticle = "muzzleflash_shotgun"
 SWEP.ShellModel = "models/shells/shell_12gauge.mdl"
@@ -205,6 +206,9 @@ SWEP.CustomizePos = Vector(16, 32, 8)
 SWEP.HolsterPos = Vector(0, 9, 0)
 SWEP.HolsterAng = Angle(5, 0, 0)
 
+SWEP.RestPos = Vector(10, 8, 0)
+SWEP.RestAng = Angle(40, -20, 0)
+
 SWEP.CrouchPos = Vector(0, -1, -1)
 SWEP.CrouchAng = Angle(0, 0, 0)
 
@@ -225,10 +229,19 @@ SWEP.Attachments = {
     },
 	{
         PrintName = "UNDERBARREL",
-        Category = {"hl_ubgl"},
+        Category = {"hl_ubgl","foregrip"},
         Bone = "Bip01 R Hand",
 		Pos = Vector(23, -0.5, 2),
 		Ang = Angle(0, 180, 0),
+    },
+	{
+        PrintName = "AMMO",
+        Category = {"hl_ammo_buckshot"},
+		Bone = "Bip01 R Hand",
+        Pos = Vector(5.0, -0.75, 4.9),
+        Ang = Angle(0, 0, 0),
+		Installed = "hl_ammo_buckshot_hl1",
+		Integral = true,
     }
 }
 
@@ -288,18 +301,36 @@ SWEP.Animations = {
         Source = "start_reload",
         Time = 0.5,
         TPAnim = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN,
-        LHIK = true,
-        LHIKIn = 1,
-        LHIKOut = 0,
+        IKTimeLine = {
+            {
+                t = 0,
+                lhik = 1,
+                rhik = 0
+            },
+            {
+                t = 0.5,
+                lhik = 0,
+                rhik = 0
+            }
+        },
         SoundTable = {}
     },
     ["reload_start_empty"] = {
         Source = "start_reload",
         Time = 0.5,
         TPAnim = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN,
-        LHIK = true,
-        LHIKIn = 0.5,
-        LHIKOut = 0,
+        IKTimeLine = {
+            {
+                t = 0,
+                lhik = 1,
+                rhik = 0
+            },
+            {
+                t = 0.5,
+                lhik = 0,
+                rhik = 0
+            }
+        },
         SoundTable = {}
     },
     ["reload_insert"] = {
@@ -308,9 +339,18 @@ SWEP.Animations = {
         TPAnim = ACT_HL2MP_GESTURE_RELOAD_SHOTGUN,
         TPAnimStartTime = 0.3,
         FrameRate = 30,
-        LHIK = true,
-        LHIKIn = 0,
-        LHIKOut = 0,
+        IKTimeLine = {
+            {
+                t = 0.0,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 1,
+                lhik = 0,
+                rhik = 0
+            }
+        },
         SoundTable = {
             {s = "ArcCW_HL1.SPAS_Shell", t = 10 / 30}
         },
@@ -320,8 +360,18 @@ SWEP.Animations = {
         Time = 1,
         FrameRate = 30,
         LHIK = true,
-        LHIKIn = 0,
-        LHIKOut = 0.4,
+        IKTimeLine = {
+            {
+                t = 0.0,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 0.4,
+                lhik = 1,
+                rhik = 0
+            }
+        },
         SoundTable = {
             {s = "ArcCW_HL1.SPAS_Pump", t = 15 / 30},
         },
@@ -330,9 +380,18 @@ SWEP.Animations = {
         Source = "pump",
         Time = 1,
         FrameRate = 30,
-        LHIK = true,
-        LHIKIn = 0,
-        LHIKOut = 1,
+		IKTimeLine = {
+            {
+                t = 0,
+                lhik = 0,
+                rhik = 0
+            },
+            {
+                t = 1,
+                lhik = 1,
+                rhik = 0
+            }
+        },
         SoundTable = {
             {s = "ArcCW_HL1.SPAS_Pump", t = 15 / 30},
         },
@@ -346,6 +405,14 @@ sound.Add( {
     level = 100,
     pitch = {95, 110},
     sound = {"weapons/sbarrel1.wav"},
+} )
+sound.Add( {
+    name = "ArcCW_HL1.SPAS_Sil",
+    channel = CHAN_WEAPON,
+    volume = 1.0,
+    level = 100,
+    pitch = {95, 110},
+    sound = {"weapons/sbarrel1_s.wav"},
 } )
 sound.Add( {
     name = "ArcCW_HL1.SPAS_Shell",

@@ -23,5 +23,6 @@ ATT.MuzzleDevice = true
 
 ATT.RecoilUpMult = 1.1
 ATT.RecoilRandomMult = 0.9
+ATT.BarrelLengthAdd = 18
 
 ARC9.LoadAttachment(ATT, "hl_glock_supp")

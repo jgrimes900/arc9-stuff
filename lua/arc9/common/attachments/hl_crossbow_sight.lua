@@ -4,7 +4,7 @@ ATT.CompactName = "SCOPE"
 ATT.Icon = Material("entities/hl_crossbow_sight.png", "mips smooth")
 ATT.Description = [[2x scope intended for heavy weapons. Low zoom lets you stay on target when firing long bursts.]]
 ATT.MenuCategory = "ARC9 - Half-Life Attatchments"
-ATT.Category = "hl_sights"
+ATT.Category = {"hl_sights", "optic_css", "fas_optic", "fas_optic_medium"}
 ATT.SortOrder = 2
 
 ATT.Model = "models/weapons/arccw/atts/c_crossbow_scope.mdl"

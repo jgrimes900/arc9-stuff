@@ -15,6 +15,7 @@ SWEP.Trivia = {
 }
 
 SWEP.Slot = 4
+SWEP.ARC9WeaponCategory = 8
 
 SWEP.NotForNPCs = true
 

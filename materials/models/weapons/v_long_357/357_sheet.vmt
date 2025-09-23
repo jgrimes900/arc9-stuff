@@ -1,0 +1,15 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/Weapons/v_long_357/357_sheet_long"
+	"$envmap" "models/v_crowbar/chrome_cammo"
+	"$basealphaenvmapmask" 1
+	"$envmapcontrast" "1"
+	"$envmapsaturation" "1"
+	"$model" 1
+	"$envmapmode" 1
+	"$envmapsphere" 1	
+	"$detailblendmode" 4
+
+	// requred to see specular on dx6+7 at all
+	"$multipass" 1
+}

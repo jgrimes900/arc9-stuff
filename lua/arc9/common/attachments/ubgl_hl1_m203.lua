@@ -6,20 +6,19 @@ ATT.Description = [[
 ]]
 ATT.MenuCategory = "ARC9 - Half-Life Attatchments"
 ATT.BoxModel = "models/items/arc9/att_plastic_box.mdl"
-ATT.Category = "hl_ubgl"--"mp5gl"
+ATT.Category = {"hl_ubgl"}--"mp5gl"
+
+ATT.ActivateElements = {"is_ubgl"}
 
 ATT.SortOrder = 0
 
-ATT.LHIK = false
+ATT.LHIK = true
 
 ATT.MuzzleDeviceUBGL = true
 
 ATT.CamCoolViewUBGL = true
 
 ATT.Model = "models/weapons/arccw/ATTs/c_hl1mp5_gl.mdl"
-ATT.ActivePosHook = function(wep, vec)
-    return vec + Vector(4, 0, -1)
-end
 
 ATT.UBGL = true
 
